@@ -1,0 +1,3 @@
+import { Link } from 'react-router-dom'
+import Brand from './Brand'
+export default function Footer() { return <footer><div className="container footer-top"><Brand /><p>Abogada · Derecho Penal · Derecho Penal Económico · Derecho Tributario</p><nav aria-label="Navegación del pie"><Link to="/">Inicio</Link><Link to="/sobre-mi">Sobre mí</Link><Link to="/servicios">Servicios</Link><Link to="/contacto">Contacto</Link></nav></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} Carolina Álvarez. Todos los derechos reservados.</span><Link to="/contacto">Política de privacidad</Link><a href="https://kovarotech.com" target="_blank" rel="noreferrer">Sitio desarrollado por Kovaro Tech ↗</a></div></footer> }
