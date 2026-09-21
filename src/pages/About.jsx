@@ -10,35 +10,38 @@ export default function About() { return <>
       </div>
     </div>
     <figure className="about-open__figure">
-      <img src="/images/carolina_4.webp" alt="Retrato editorial de Carolina Álvarez" width="4160" height="6240" fetchPriority="high" />
+      <img src="/images/about-portrait.webp" alt="Retrato editorial de Carolina Álvarez" width="1400" height="1522" fetchPriority="high" />
     </figure>
   </section>
 
   <section className="about-education" id="formacion">
     <div className="container">
       <p className="section-label">Formación</p>
-      <h2>Posgrados en las tres áreas de su <em>práctica.</em></h2>
+      <h2>Posgrados en las tres áreas de su práctica.</h2>
       <div className="about-masters">
-        <p><small>Magíster</small>Derecho Penal</p>
-        <p><small>Magíster</small>Derecho Penal Económico</p>
-        <p><small>Magíster</small>Tributación</p>
+        <p className="about-masters__label">Magíster en</p>
+        <ul className="about-masters__list">
+          <li>Derecho Penal</li>
+          <li>Derecho Penal Económico</li>
+          <li>Tributación</li>
+        </ul>
       </div>
-      <p className="about-diplomas">Diplomado en Gestión Pública <span>·</span> Diplomado en Ciencias Políticas</p>
+      <p className="about-diplomas">Diplomado en Gestión Pública y Diplomado en Ciencias Políticas.</p>
     </div>
   </section>
 
   <section className="about-institutional">
     <div className="container">
       <p className="section-label">Experiencia institucional</p>
-      <h2>Dirección Nacional de Acceso a los Servicios de <em>Justicia.</em></h2>
-      <div className="institutional-areas">Género <span>·</span> Acceso a la justicia <span>·</span> Pluralismo jurídico <span>·</span> Mediación <span>·</span> Justicia de paz</div>
+      <h2>Dirección Nacional de Acceso a los Servicios de Justicia.</h2>
+      <p className="institutional-areas">Su trabajo allí abordó asuntos de género, acceso a la justicia, pluralismo jurídico, mediación y justicia de paz.</p>
     </div>
   </section>
 
   <section className="about-defense">
     <div className="container">
       <p className="section-label">Ejercicio de la defensa</p>
-      <h2>Defensa jurídica de altos cargos públicos y organizaciones en asuntos de especial <em>complejidad.</em></h2>
+      <h2>Defensa jurídica de altos cargos públicos y organizaciones en asuntos de especial complejidad.</h2>
     </div>
   </section>
 
