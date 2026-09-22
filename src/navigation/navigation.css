@@ -1,0 +1,15 @@
+/* The document owns scroll. overflow:hidden would disable its sticky header. */
+.site-shell { overflow: clip; }
+html { scroll-behavior: auto; overflow-anchor: none; }
+:root { --navigation-header-height: 92px; }
+.route-transition { animation: none; }
+main:focus { outline: none; }
+.service-chapter { scroll-margin-top: calc(var(--navigation-header-height) + 24px); }
+@media (max-width: 760px) {
+  :root { --navigation-header-height: 72px; }
+  .service-chapter { scroll-margin-top: calc(var(--navigation-header-height) + 24px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .route-transition, .service-chapter__panel { animation: none; transition: none; }
+}
