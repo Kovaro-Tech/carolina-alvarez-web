@@ -1,4 +1,32 @@
-import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import Icon from '../components/Icon'
+import { practiceAreas } from '../data/practiceAreas'
 import { siteConfig, whatsappUrl } from '../data/siteConfig'
-export default function Contact() { const [sent,setSent]=useState(false); const submit=e=>{e.preventDefault();setSent(true)}; return <><section className="contact-direct"><div className="container"><h1>Hablemos sobre tu <em>caso.</em></h1><a className="whatsapp-priority" href={whatsappUrl} target="_blank" rel="noopener noreferrer">Escribir por WhatsApp <Icon name="arrow" /></a></div></section><section className="contact section"><div className="container contact-grid"><div className="contact-copy"><div className="contact-details"><a href={whatsappUrl} target="_blank" rel="noopener noreferrer"><Icon name="phone" /><span><small>WhatsApp / Teléfono</small>{siteConfig.phone}</span></a><a href={`mailto:${siteConfig.email}`}><Icon name="mail" /><span><small>Correo electrónico</small>{siteConfig.email}</span></a><div><Icon name="pin" /><span><small>Ubicación</small>{siteConfig.location} · Presencial y virtual</span></div></div></div><form className="contact-form" onSubmit={submit}><div className="form-row"><label>Nombre<input required name="name" placeholder="Tu nombre" /></label><label>Teléfono<input required name="phone" placeholder="Tu teléfono" /></label></div><label>Correo<input required type="email" name="email" placeholder="nombre@correo.com" /></label><label>Área de consulta<select required defaultValue=""><option value="" disabled>Selecciona un área</option><option>Derecho Penal</option><option>Derecho Penal Económico</option><option>Derecho Tributario</option></select></label><label>Mensaje<textarea required name="message" rows="4" placeholder="Cuéntame brevemente tu situación" /></label><button className="button button--primary" type="submit">{sent ? 'Consulta enviada' : 'Enviar consulta'} <Icon name={sent ? 'check' : 'arrow'} /></button>{sent && <p className="form-success" role="status">Gracias. Te contactaré para coordinar una consulta.</p>}</form></div></section></> }
+
+export default function Contact() {
+  const [searchParams] = useSearchParams()
+  const area = practiceAreas.find((item) => item.slug === searchParams.get('area'))
+  const message = area ? `Hola Carolina, quisiera coordinar una consulta sobre ${area.title}.` : siteConfig.whatsappMessage
+  const contactUrl = area ? `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(message)}` : whatsappUrl
+  const emailUrl = `mailto:${siteConfig.email}?subject=${encodeURIComponent(area ? `Consulta sobre ${area.title}` : 'Consulta jurídica')}`
+
+  return <section className="contact-page">
+    <div className="container">
+      <p className="section-label">Contacto</p>
+      <h1>Coordinar una <em>consulta.</em></h1>
+      <div className="contact-page__layout">
+        <div className="contact-page__intro">
+          {area && <p className="contact-area">Consulta sobre {area.title}</p>}
+          <p>Escribe a Carolina para comentar brevemente el motivo de tu consulta y coordinar una cita.</p>
+          <a className="button button--primary" href={contactUrl} target="_blank" rel="noopener noreferrer">Escribir por WhatsApp <Icon name="arrow" /></a>
+          <p className="contact-page__note">Al escribir, indica el área de consulta, si existe alguna fecha próxima que debamos considerar y tu disponibilidad.</p>
+        </div>
+        <div className="contact-details">
+          <a href={contactUrl} target="_blank" rel="noopener noreferrer"><Icon name="phone" /><span><small>WhatsApp</small>{siteConfig.phone}</span></a>
+          <a href={emailUrl}><Icon name="mail" /><span><small>Correo electrónico</small>{siteConfig.email}</span></a>
+          <div><Icon name="pin" /><span><small>Ubicación y modalidad</small>{siteConfig.location}<span className="contact-modality">{siteConfig.modality}</span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+}

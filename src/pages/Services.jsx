@@ -20,8 +20,9 @@ export default function Services() {
   return <>
     <section className="services-hero">
       <div className="container">
-        <h1>Áreas de <em>práctica</em></h1>
-        <p>Derecho Penal, Derecho Penal Económico y Tributación.</p>
+        <p className="section-label">Servicios jurídicos</p>
+        <h1>Áreas de <em>práctica.</em></h1>
+        <p>Asesoría y defensa para personas y empresas en asuntos penales, económicos y tributarios. Cada intervención parte del estudio de los hechos y de la situación jurídica de quien consulta.</p>
         <nav className="services-index" aria-label="Índice de áreas de práctica">
           {practiceAreas.map((area) => <Link key={area.slug} to={`#${area.slug}`}>
             <span>{area.number}</span>{area.title}
@@ -51,9 +52,10 @@ export default function Services() {
               <div className="service-chapter__panel-inner">
                 <div className="service-chapter__body">
                   <p>{area.text}</p>
-                  {/* Only display specific scopes once Carolina has validated them. */}
-                  {area.points?.length > 0 && <ul>{area.points.map((point) => <li key={point}>{point}</li>)}</ul>}
-                  <Link className="text-link" to="/contacto">Consultar sobre esta área <Icon name="arrow" /></Link>
+                  <p>{area.detail}</p>
+                  <h3>Ámbitos de intervención</h3>
+                  <ul>{area.points.map((point) => <li key={point}>{point}</li>)}</ul>
+                  <Link className="text-link" to={`/contacto?area=${area.slug}`}>{area.cta} <Icon name="arrow" /></Link>
                 </div>
               </div>
             </div>

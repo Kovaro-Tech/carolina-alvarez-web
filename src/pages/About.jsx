@@ -1,49 +1,80 @@
-import CTASection from '../components/CTASection'
+import { Link } from 'react-router-dom'
+import Icon from '../components/Icon'
 
-export default function About() { return <>
-  <section className="about-open">
-    <div className="container">
-      <div className="about-open__copy">
-        <p className="about-open__label">Carolina Álvarez <span>·</span> Abogada</p>
-        <h1>Una trayectoria entre el sistema de justicia y el ejercicio de la <em>defensa.</em></h1>
-        <p className="about-open__intro">Magíster en Derecho Penal, en Derecho Penal Económico y en Tributación. Su recorrido reúne el trabajo en la Dirección Nacional de Acceso a los Servicios de Justicia y la defensa jurídica de altos cargos públicos y organizaciones.</p>
+const qualifications = [
+  ['Título profesional', ['Abogada']],
+  ['Maestrías', ['Magíster en Derecho Penal', 'Magíster en Derecho Penal Económico', 'Magíster en Tributación']],
+  ['Formación complementaria', ['Diplomado en Gestión Pública', 'Diplomado en Ciencias Políticas']],
+]
+
+export default function About() {
+  return <>
+    <section className="about-open">
+      <div className="container about-open__layout">
+        <div className="about-open__copy">
+          <p className="section-label">Sobre mí · Abogada</p>
+          <h1>Carolina <em>Álvarez.</em></h1>
+          <p className="about-open__intro">Una trayectoria que reúne formación de posgrado, experiencia en el sistema de justicia y ejercicio de la defensa.</p>
+          <p>Su práctica se concentra en el Derecho Penal, el Derecho Penal Económico y la Tributación: tres áreas que permiten abordar las relaciones entre responsabilidad, actividad empresarial y patrimonio.</p>
+          <a className="text-link" href="#formacion">Explorar trayectoria <Icon name="arrow" /></a>
+        </div>
+        <figure className="about-open__figure">
+          <img src="/images/carolina_3.webp" alt="Carolina Álvarez, abogada, con traje blanco y los brazos cruzados" width="1074" height="1074" fetchPriority="high" />
+          <figcaption>Carolina Álvarez <span>Abogada</span></figcaption>
+        </figure>
       </div>
-    </div>
-    <figure className="about-open__figure">
-      <img src="/images/about-portrait.webp" alt="Retrato editorial de Carolina Álvarez" width="1400" height="1522" fetchPriority="high" />
-    </figure>
-  </section>
-
-  <section className="about-education" id="formacion">
-    <div className="container">
-      <p className="section-label">Formación</p>
-      <h2>Posgrados en las tres áreas de su práctica.</h2>
-      <div className="about-masters">
-        <p className="about-masters__label">Magíster en</p>
-        <ul className="about-masters__list">
-          <li>Derecho Penal</li>
-          <li>Derecho Penal Económico</li>
-          <li>Tributación</li>
-        </ul>
+    </section>
+    <section className="about-education" id="formacion" tabIndex={-1} aria-labelledby="education-title">
+      <div className="container about-education__layout">
+        <div className="about-education__intro">
+          <p className="section-label">01 / Formación académica</p>
+          <h2 id="education-title">Tres maestrías.<br />Una visión <em>integral.</em></h2>
+          <p>Su formación de posgrado integra tres áreas jurídicas clave en asuntos complejos: Derecho Penal, Derecho Penal Económico y Tributación.</p>
+          <p>Esta preparación aporta herramientas para analizar la dimensión penal de un caso junto con sus implicaciones empresariales, patrimoniales y tributarias. Los diplomados en Gestión Pública y Ciencias Políticas complementan esa base con una perspectiva sobre las instituciones y la gestión de lo público.</p>
+        </div>
+        <div className="qualifications">
+          {qualifications.map(([label, titles]) => <div className="qualification-group" key={label}>
+            <h3>{label}</h3>
+            <ul>{titles.map((title) => <li key={title}>{title}</li>)}</ul>
+          </div>)}
+        </div>
       </div>
-      <p className="about-diplomas">Diplomado en Gestión Pública y Diplomado en Ciencias Políticas.</p>
-    </div>
-  </section>
-
-  <section className="about-institutional">
-    <div className="container">
-      <p className="section-label">Experiencia institucional</p>
-      <h2>Dirección Nacional de Acceso a los Servicios de Justicia.</h2>
-      <p className="institutional-areas">Su trabajo allí abordó asuntos de género, acceso a la justicia, pluralismo jurídico, mediación y justicia de paz.</p>
-    </div>
-  </section>
-
-  <section className="about-defense">
-    <div className="container">
-      <p className="section-label">Ejercicio de la defensa</p>
-      <h2>Defensa jurídica de altos cargos públicos y organizaciones en asuntos de especial complejidad.</h2>
-    </div>
-  </section>
-
-  <CTASection />
-</> }
+    </section>
+    <section className="about-institutional">
+      <div className="container about-institutional__layout">
+        <div>
+          <p className="section-label">02 / Experiencia institucional</p>
+          <h2>Acceso a los servicios de <em>justicia.</em></h2>
+          <p>Carolina trabajó en la Dirección Nacional de Acceso a los Servicios de Justicia del Consejo de la Judicatura. Su experiencia en esta dirección incluyó las siguientes subdirecciones:</p>
+        </div>
+        <ol className="institutional-areas">
+          <li><span>01</span><h3>Subdirección de Género</h3></li>
+          <li><span>02</span><h3>Subdirección de Acceso a los Servicios de Justicia y Pluralismo Jurídico</h3></li>
+          <li><span>03</span><h3>Subdirección de Centros de Mediación y Justicia de Paz</h3></li>
+        </ol>
+      </div>
+    </section>
+    <section className="about-defense">
+      <div className="container about-defense__layout">
+        <figure className="about-defense__figure">
+          <img src="/images/carolina_4.webp" alt="Carolina Álvarez sentada en un retrato de estudio" width="4160" height="6240" loading="lazy" />
+          <figcaption>Trayectoria profesional / Carolina Álvarez</figcaption>
+        </figure>
+        <div className="about-defense__copy">
+          <p className="section-label">03 / Experiencia en defensa</p>
+          <h2>Defensa de altos cargos públicos y <em>empresas.</em></h2>
+          <div className="defense-case">
+            <h3>Caso Apagón</h3>
+            <p>Ha participado en la defensa de altos cargos públicos en el Caso Apagón, como parte de su experiencia en el ejercicio de la defensa penal.</p>
+          </div>
+          <div className="defense-companies">
+            <h3>Empresas nacionales e internacionales</h3>
+            <p>Su experiencia profesional incluye también la intervención en la defensa de empresas como:</p>
+            <ul><li>Novacero</li><li>LALIGA <span>España</span></li><li>DirecTV</li><li>Saludsa</li></ul>
+          </div>
+          <Link className="text-link" to="/contacto">Coordinar una consulta <Icon name="arrow" /></Link>
+        </div>
+      </div>
+    </section>
+  </>
+}

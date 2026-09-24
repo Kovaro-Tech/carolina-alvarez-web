@@ -3,13 +3,37 @@ import Icon from '../components/Icon'
 import CTASection from '../components/CTASection'
 import ServiceCards from '../components/ServiceCards'
 
-export default function Home() { return <>
-  <section className="home-hero">
-    <picture className="home-hero__stage"><source media="(max-width: 760px)" srcSet="/images/hero-portrait.webp" width="1074" height="1122" /><img src="/images/hero-stage.webp" alt="Carolina Álvarez, abogada" width="1448" height="1122" fetchPriority="high" /></picture>
-    <div className="home-hero__inner"><div className="home-hero__copy"><h1>Defensa jurídica con <em>estrategia</em> y criterio.</h1><p className="home-hero__areas"><span>Derecho Penal</span>{' '}<span>Derecho Penal Económico</span>{' '}<span>Tributación</span></p><div className="actions"><Link className="button button--primary" to="/contacto">Agendar consulta <Icon name="arrow" /></Link><Link className="home-hero__link" to="/servicios">Conocer servicios <Icon name="arrow" /></Link></div></div></div>
-  </section>
-  <section className="home-intro"><div className="container"><h2>Preparación para asuntos de alta exigencia.</h2><p>Carolina Álvarez combina estudios de posgrado con trabajo dentro del sistema de justicia y en el ejercicio profesional.</p><p className="education-summary">Magíster en tres áreas jurídicas · Diplomados en Gestión Pública y Ciencias Políticas</p><Link className="text-link" to="/sobre-mi">Conocer trayectoria <Icon name="arrow" /></Link></div></section>
-  <section className="home-services-preview"><div className="container"><div className="home-services-preview__heading"><h2>Áreas de <em>práctica.</em></h2></div><ServiceCards /><Link className="text-link home-services-preview__link" to="/servicios">Ver todas las áreas <Icon name="arrow" /></Link></div></section>
-  <section className="selected-experience"><div className="container"><p>Experiencia en defensa jurídica de altos cargos públicos y organizaciones en asuntos de especial complejidad.</p></div></section>
-  <CTASection />
-</> }
+export default function Home() {
+  return <>
+    <section className="home-hero" aria-labelledby="home-title">
+      <img className="home-hero__architecture" src="/images/institutional-architecture.webp" alt="" width="1920" height="1280" fetchPriority="high" />
+      <div className="container home-hero__inner">
+        <div className="home-hero__copy">
+          <p className="home-hero__name">Carolina Álvarez <span>Abogada</span></p>
+          <h1 id="home-title">Defensa jurídica con <em>estrategia</em> y criterio.</h1>
+          <ul className="home-hero__areas"><li>Derecho Penal</li><li>Derecho Penal Económico</li><li>Tributación</li></ul>
+          <div className="actions">
+            <Link className="button button--light" to="/contacto">Agendar consulta <Icon name="arrow" /></Link>
+            <Link className="home-hero__link" to="/servicios">Conocer servicios <Icon name="arrow" /></Link>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section className="home-services-preview">
+      <div className="container">
+        <div className="home-services-preview__heading"><p className="section-label">Servicios jurídicos</p><h2>Tres áreas de <em>práctica.</em></h2></div>
+        <ServiceCards />
+      </div>
+    </section>
+    <section className="home-profile">
+      <div className="container home-profile__layout">
+        <div><p className="section-label">Sobre Carolina</p><h2>Formación jurídica.<br /><em>Experiencia en defensa.</em></h2></div>
+        <div className="home-profile__copy">
+          <p>Abogada con tres maestrías y experiencia en la Dirección Nacional de Acceso a los Servicios de Justicia. Su ejercicio profesional comprende la defensa de altos cargos públicos y de empresas nacionales e internacionales.</p>
+          <Link className="text-link" to="/sobre-mi">Conocer su trayectoria <Icon name="arrow" /></Link>
+        </div>
+      </div>
+    </section>
+    <CTASection />
+  </>
+}

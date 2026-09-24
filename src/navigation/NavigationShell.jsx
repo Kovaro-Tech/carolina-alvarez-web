@@ -104,9 +104,9 @@ export default function NavigationShell({ children }) {
     } else if (!animate) {
       jump(destination)
     } else if (newPage) {
-      // Stage while invisible, close to the anchor. The visible journey is a
+      // Stage close to the anchor with a soft fade. The visible journey is a
       // short continuous scroll, not top-of-page followed by a teleport.
-      main.style.opacity = '0'
+      main.style.opacity = '.45'
       jump(target ? Math.max(0, destination - window.innerHeight * .45) : 0)
     } else {
       // Replacing keyed content can reset the browser's focused scroll node.
@@ -126,9 +126,9 @@ export default function NavigationShell({ children }) {
       if (controller.signal.aborted) { main.style.opacity = ''; return }
       if (animate && newPage && main.animate) {
         entryAnimation = main.animate([
-          { opacity: 0, transform: 'translateY(8px)' },
+          { opacity: .45, transform: 'translateY(4px)' },
           { opacity: 1, transform: 'translateY(0)' },
-        ], { duration: 320, easing: 'cubic-bezier(.2,.65,.25,1)' })
+        ], { duration: 280, easing: 'cubic-bezier(.22,1,.36,1)' })
       }
       main.style.opacity = ''
       if (!restore && animate && target) await moveTo(destination, controller.signal)
@@ -165,8 +165,8 @@ export default function NavigationShell({ children }) {
     if (url.pathname !== location.pathname && !reducedMotion() && main.animate) {
       exit.current = main.animate([
         { opacity: getComputedStyle(main).opacity, transform: 'translateY(0)' },
-        { opacity: 0, transform: 'translateY(-4px)' },
-      ], { duration: 120, easing: 'ease-out', fill: 'forwards' })
+        { opacity: .45, transform: 'translateY(-2px)' },
+      ], { duration: 140, easing: 'ease-out', fill: 'forwards' })
       try { await exit.current.finished } catch { return }
     }
     if (task !== sequence.current) return
