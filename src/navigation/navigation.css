@@ -20,11 +20,10 @@ main:focus { outline: none; }
   backdrop-filter: blur(12px);
   box-shadow: 0 4px 18px #071b3305;
 }
-.header .logo, .header .mark, .nav-links, .nav-links > a {
+.header .logo, .nav-links, .nav-links > a {
   transition: color 240ms ease, border-color 240ms ease, background-color 240ms ease, box-shadow 240ms ease;
 }
 .header--over-hero .logo, .header--over-hero .nav-links { color: #fff; }
-.header--over-hero .mark { border-color: #ffffff80; }
 .header--over-hero .nav-cta { color: #fff; background: #ffffff12; box-shadow: inset 0 0 0 1px #ffffff70; }
 .header--over-hero .nav-cta:hover { color: var(--navy); background: #fff; }
 .nav-links > a:not(.nav-cta)::after { background: currentColor; transform-origin: left; transition: transform 240ms var(--ease-out); }
@@ -81,7 +80,7 @@ main:focus { outline: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .route-transition, .service-chapter__panel { animation: none; transition: none; }
-  .header, .header .logo, .header .mark, .nav-links, .nav-links > a,
+  .header, .header .logo, .nav-links, .nav-links > a,
   .nav-links > a::after, .menu-toggle span, .button, .floating-whatsapp,
   .text-link, .home-hero__link, .service-card, .service-card__shape,
   .contact-details a, .footer-top nav a, .footer-bottom a,

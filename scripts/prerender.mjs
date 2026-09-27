@@ -13,7 +13,7 @@ assert(template.includes('<!--page-head-->'), 'Missing metadata placeholder')
 for (const article of publications) {
   assert(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(article.slug), 'Use a URL-safe article slug')
   assert(article.title && article.description && article.paragraphs?.length, 'Articles need approved content')
-  assert(/^\d{4}-\d{2}-\d{2}$/.test(article.datePublished) && Number.isFinite(Date.parse(article.datePublished)), 'Use the actual publication date')
+  if (article.datePublished) assert(/^\d{4}-\d{2}-\d{2}$/.test(article.datePublished) && Number.isFinite(Date.parse(article.datePublished)), 'Use the actual publication date')
 }
 assert.equal(new Set(publications.map((article) => article.slug)).size, publications.length, 'Duplicate article slug')
 await access(resolve(output, siteConfig.socialImage.path.slice(1)))

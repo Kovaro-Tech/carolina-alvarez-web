@@ -24,7 +24,7 @@
 .final-cta p:not(.section-label) { color: #52677b; font-size: 14px; margin: 20px 0 0; }
 .final-cta .button { flex-shrink: 0; }
 
-/* Two original portraits, with distinct roles and natural proportions. */
+/* A single original portrait, displayed in its natural proportions. */
 .about-open { padding: 72px 0 64px; background: var(--paper); }
 .about-open__layout { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; }
 .about-open__copy h1 { margin: 0; color: var(--navy); font: clamp(56px, 6vw, 86px)/1.04 var(--serif); letter-spacing: -2.7px; }
@@ -32,7 +32,7 @@
 .about-open__copy p:not(.section-label) { color: #526477; font-size: 16px; line-height: 1.85; margin: 24px 0; }
 .about-open__copy p.about-open__intro { color: var(--navy); font: 25px/1.5 var(--serif); }
 .about-open__copy .text-link { margin-top: 10px; }
-.about-open__figure { margin: 0; }
+.about-open__figure { margin: 0; width: 100%; max-width: 380px; justify-self: end; }
 .about-open__figure img { display: block; width: 100%; height: auto; }
 .about-open__figure figcaption { display: flex; justify-content: space-between; margin-top: 16px; color: #526477; font-size: 11px; }
 .about-open__figure figcaption span { text-transform: uppercase; letter-spacing: 1.5px; font-size: 9px; }
@@ -57,16 +57,12 @@
 .institutional-areas li { display: grid; grid-template-columns: 24px 1fr; gap: 20px; padding: 28px 0; border-bottom: 1px solid #ffffff30; }
 .institutional-areas li > span { padding-top: 4px; font-size: 11px; color: #abc9df; }
 .institutional-areas h3 { margin: 0; color: #fff; font: 24px/1.4 var(--serif); }
-.about-defense__layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: 90px; align-items: center; }
-.about-defense__figure { max-width: 420px; margin: 0; }
-.about-defense__figure img { display: block; width: 100%; height: auto; }
-.about-defense__figure figcaption { margin-top: 17px; font-size: 10px; color: #607388; letter-spacing: .6px; }
+.about-defense__layout { max-width: 900px; }
 .defense-case { margin-top: 34px; }
 .defense-case h3, .defense-companies h3 { margin: 0 0 12px; color: var(--navy); font: 24px/1.3 var(--serif); }
 .defense-companies { border-top: 1px solid var(--line); margin: 28px 0 30px; padding-top: 26px; }
 .defense-companies ul { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; margin: 24px 0 0; padding: 0; list-style: none; }
-.defense-companies li { padding: 17px 0; border-bottom: 1px solid var(--line); color: var(--navy); font-size: 19px; font-weight: 500; }
-.defense-companies li span { font-size: 11px; color: #607388; font-weight: 400; margin-left: 6px; }
+.defense-companies li { padding: 17px 0; border-bottom: 1px solid var(--line); color: var(--navy); font-size: 17px; line-height: 1.6; font-weight: 500; }
 
 @media (max-width: 1000px) {
   .home-hero { min-height: calc(620px + var(--navigation-header-height)); }
@@ -93,10 +89,10 @@
   .about-open__copy h1 { font-size: clamp(54px, 11vw, 70px); }
   .about-open__copy p.about-open__intro { font-size: 23px; }
   .about-open__copy p:not(.section-label) { margin: 22px 0; }
-  .about-open__figure { max-width: 480px; }
+  .about-open__figure { max-width: 340px; justify-self: center; }
   .about-education h2, .about-institutional h2, .about-defense h2 { font-size: 38px; letter-spacing: -1.2px; }
   .qualification-group li { font-size: 25px; }
   .institutional-areas h3 { font-size: 22px; }
-  .about-defense__figure { width: 78%; max-width: 340px; }
+  .defense-companies ul { grid-template-columns: 1fr; }
   .about-defense__copy { min-width: 0; }
 }

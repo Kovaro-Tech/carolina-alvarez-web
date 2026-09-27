@@ -1,0 +1,47 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  text-decoration: none;
+  color: var(--navy);
+}
+
+.logo-image {
+  display: block;
+  flex: none;
+  width: auto;
+  height: 64px;
+  object-fit: contain;
+}
+
+.logo-name {
+  display: grid;
+  gap: 2px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.logo-name b,
+.logo-name strong {
+  font: 400 12px/1.1 var(--serif);
+}
+
+.logo-name i {
+  margin-top: 4px;
+  font-size: 7px;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: 2.2px;
+}
+
+.footer-top .logo-image {
+  height: 52px;
+}
+
+@media (max-width: 760px) {
+  .logo { gap: 8px; }
+  .logo-image { height: 52px; }
+  .logo-name { letter-spacing: 1.2px; }
+  .logo-name b, .logo-name strong { font-size: 11px; }
+}

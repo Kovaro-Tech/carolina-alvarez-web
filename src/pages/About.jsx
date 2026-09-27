@@ -19,7 +19,7 @@ export default function About() {
           <a className="text-link" href="#formacion">Explorar trayectoria <Icon name="arrow" /></a>
         </div>
         <figure className="about-open__figure">
-          <img src="/images/carolina_3.webp" alt="Carolina Álvarez, abogada, con traje blanco y los brazos cruzados" width="1074" height="1074" fetchPriority="high" />
+          <img src="/images/carolina_4.webp" alt="Carolina Álvarez sentada en un retrato de estudio" width="4160" height="6240" fetchPriority="high" />
           <figcaption>Carolina Álvarez <span>Abogada</span></figcaption>
         </figure>
       </div>
@@ -56,10 +56,6 @@ export default function About() {
     </section>
     <section className="about-defense">
       <div className="container about-defense__layout">
-        <figure className="about-defense__figure">
-          <img src="/images/carolina_4.webp" alt="Carolina Álvarez sentada en un retrato de estudio" width="4160" height="6240" loading="lazy" />
-          <figcaption>Trayectoria profesional / Carolina Álvarez</figcaption>
-        </figure>
         <div className="about-defense__copy">
           <p className="section-label">03 / Experiencia en defensa</p>
           <h2>Defensa de altos cargos públicos y <em>empresas.</em></h2>
@@ -68,9 +64,18 @@ export default function About() {
             <p>Ha participado en la defensa de altos cargos públicos en el Caso Apagón, como parte de su experiencia en el ejercicio de la defensa penal.</p>
           </div>
           <div className="defense-companies">
-            <h3>Empresas nacionales e internacionales</h3>
-            <p>Su experiencia profesional incluye también la intervención en la defensa de empresas como:</p>
-            <ul><li>Novacero</li><li>LALIGA <span>España</span></li><li>DirecTV</li><li>Saludsa</li></ul>
+            <h3>Sectores y organizaciones</h3>
+            <p>Su experiencia profesional comprende la representación y defensa de clientes pertenecientes a los siguientes sectores y tipos de organización:</p>
+            <ul>
+              <li>Empresas multinacionales e internacionales</li>
+              <li>Compañías aseguradoras y de salud</li>
+              <li>Medios de comunicación y entretenimiento</li>
+              <li>Empresas de telecomunicaciones y tecnología</li>
+              <li>Organizaciones deportivas</li>
+              <li>Empresas inmobiliarias y de servicios</li>
+              <li>Empresas comerciales e industriales</li>
+              <li>Empresas de producción y servicios especializados</li>
+            </ul>
           </div>
           <Link className="text-link" to="/contacto">Coordinar una consulta <Icon name="arrow" /></Link>
         </div>
