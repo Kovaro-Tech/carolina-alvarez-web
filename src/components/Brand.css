@@ -7,13 +7,28 @@
   color: var(--navy);
 }
 
+.logo-artwork {
+  display: grid;
+  flex: none;
+  width: 136px;
+  height: 64px;
+}
+
 .logo-image {
   display: block;
-  flex: none;
-  width: auto;
-  height: 64px;
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
   object-fit: contain;
+  transition: opacity 240ms ease;
 }
+
+.logo-image--light { opacity: 0; }
+.logo--light .logo-image--light { opacity: 1; }
+.logo--light .logo-image--dark { opacity: 0; }
+.logo-image--temporary-light { filter: brightness(0) invert(1); }
 
 .logo-name {
   display: grid;
@@ -35,13 +50,18 @@
   letter-spacing: 2.2px;
 }
 
-.footer-top .logo-image {
+.footer-top .logo-artwork {
+  width: 111px;
   height: 52px;
 }
 
 @media (max-width: 760px) {
   .logo { gap: 8px; }
-  .logo-image { height: 52px; }
+  .logo-artwork { width: 111px; height: 52px; }
   .logo-name { letter-spacing: 1.2px; }
   .logo-name b, .logo-name strong { font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-image { transition: none; }
 }

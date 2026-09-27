@@ -5,7 +5,7 @@ import { siteConfig } from '../data/siteConfig'
 export default function Footer() {
   return <footer>
     <div className="container footer-top">
-      <Brand />
+      <Brand variant="light" />
       <p>{siteConfig.location}<br />{siteConfig.modality}</p>
       <nav aria-label="Navegación del pie">
         <Link to="/">Inicio</Link><Link to="/sobre-mi">Sobre mí</Link><Link to="/servicios">Servicios</Link><Link to="/publicaciones">Publicaciones</Link><Link to="/contacto">Contacto</Link>
