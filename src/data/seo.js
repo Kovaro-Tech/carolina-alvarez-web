@@ -6,7 +6,7 @@ export const pageMeta = {
   '/sobre-mi': { title: 'Carolina Álvarez | Trayectoria y Formación Profesional', description: 'Conoce la formación de posgrado y la trayectoria de Carolina Álvarez en el sistema de justicia y la defensa jurídica en Ecuador.' },
   '/servicios': { title: 'Servicios Jurídicos | Carolina Álvarez', description: 'Asesoría y defensa en Derecho Penal, Derecho Penal Económico y Derecho Tributario para personas y empresas. Atención en Quito y virtual.' },
   '/contacto': { title: 'Contacto | Carolina Álvarez Abogada', description: 'Contacta a Carolina Álvarez por WhatsApp o correo para coordinar una consulta jurídica en Quito, Ecuador, o mediante atención virtual.' },
-  '/publicaciones': { title: 'Publicaciones Jurídicas | Carolina Álvarez', description: 'Espacio de artículos y análisis jurídicos de Carolina Álvarez sobre Derecho Penal, Penal Económico y Tributación. Próximamente.' },
+  '/publicaciones': { title: 'Publicaciones Jurídicas | Carolina Álvarez', description: 'Artículos y análisis jurídicos de Carolina Álvarez sobre Derecho Penal, Penal Económico y Tributación.' },
   '/politica-de-privacidad': { title: 'Política de Privacidad | Carolina Álvarez', description: 'Información sobre los datos de contacto, las finalidades del tratamiento y el ejercicio de tus derechos ante Carolina Álvarez.', noindex: true },
   '/politica-de-cookies': { title: 'Política de Cookies | Carolina Álvarez', description: 'Conoce el almacenamiento técnico de navegación del sitio de Carolina Álvarez y cómo gestionarlo desde tu navegador.', noindex: true },
 }
@@ -17,7 +17,7 @@ export const publicPaths = () => [...Object.keys(pageMeta), ...publications.map(
 export function getPageMeta(pathname) {
   const path = normalizePath(pathname)
   const article = publications.find((item) => publicationPath(item) === path)
-  const meta = article ? { title: `${article.title} | Carolina Álvarez`, description: article.description, article } : pageMeta[path]
+  const meta = article ? { title: article.seoTitle || `${article.title} | Carolina Álvarez`, description: article.description, article } : pageMeta[path]
   if (!meta) return { title: 'Página no encontrada | Carolina Álvarez', description: 'La página solicitada no existe. Vuelve al inicio para conocer los servicios jurídicos de Carolina Álvarez.', noindex: true }
   return { ...meta, canonical: new URL(path, SITE_URL).href }
 }

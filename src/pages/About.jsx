@@ -29,7 +29,7 @@ export default function About() {
         <div className="about-education__intro">
           <p className="section-label">01 / Formación académica</p>
           <h2 id="education-title">Tres maestrías.<br />Una visión <em>integral.</em></h2>
-          <p>Su formación de posgrado integra tres áreas jurídicas clave en asuntos complejos: Derecho Penal, Derecho Penal Económico y Tributación.</p>
+          <p>Su formación de posgrado reúne tres áreas que convergen especialmente en asuntos de alta complejidad: Derecho Penal, Derecho Penal Económico y Tributación.</p>
           <p>Esta preparación aporta herramientas para analizar la dimensión penal de un caso junto con sus implicaciones empresariales, patrimoniales y tributarias. Los diplomados en Gestión Pública y Ciencias Políticas complementan esa base con una perspectiva sobre las instituciones y la gestión de lo público.</p>
         </div>
         <div className="qualifications">
@@ -65,7 +65,7 @@ export default function About() {
           </div>
           <div className="defense-companies">
             <h3>Sectores y organizaciones</h3>
-            <p>Su experiencia profesional comprende la representación y defensa de clientes pertenecientes a los siguientes sectores y tipos de organización:</p>
+            <p>Su experiencia en el ejercicio de la defensa comprende también la representación de organizaciones pertenecientes a distintos sectores empresariales, tanto nacionales como internacionales.</p>
             <ul>
               <li>Empresas multinacionales e internacionales</li>
               <li>Compañías aseguradoras y de salud</li>

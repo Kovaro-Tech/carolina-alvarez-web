@@ -9,8 +9,9 @@ export default function Publication() {
   return <article className="legal-page publication-detail container">
     <Link className="text-link publication-back" to="/publicaciones">Volver a publicaciones</Link>
     <header className="publication-heading">
-      <p className="section-label">Publicaciones / Carolina Álvarez</p>
+      <p className="section-label">Publicación</p>
       <h1>{article.title}</h1>
+      <p className="publication-author">{article.author}</p>
       {article.datePublished && <time className="publication-date" dateTime={article.datePublished}>{new Date(`${article.datePublished}T12:00:00Z`).toLocaleDateString('es-EC', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })}</time>}
       <p className="publication-summary">{article.description}</p>
     </header>
@@ -21,7 +22,6 @@ export default function Publication() {
         {section.paragraphs.map((paragraph, paragraphIndex) => <p key={paragraphIndex}>{paragraph}</p>)}
       </section>)}
     </div>
-    {article.sourcePdf && <p><a href={article.sourcePdf} target="_blank" rel="noopener noreferrer">Consultar el artículo original (PDF)</a></p>}
     <Link className="text-link publication-back" to="/publicaciones">Ver todas las publicaciones</Link>
   </article>
 }

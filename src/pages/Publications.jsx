@@ -12,8 +12,9 @@ export default function Publications() {
         <article>
           {article.datePublished && <time className="publication-date" dateTime={article.datePublished}>{new Date(`${article.datePublished}T12:00:00Z`).toLocaleDateString('es-EC', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })}</time>}
           <h2><Link to={publicationPath(article)}>{article.title}</Link></h2>
+          <p className="publication-author">{article.author}</p>
           <p>{article.description}</p>
-          <Link className="text-link" to={publicationPath(article)} aria-label={`Leer artículo: ${article.title}`}>Leer artículo <Icon name="arrow" /></Link>
+          <Link className="text-link" to={publicationPath(article)} aria-label={`Leer publicación: ${article.title}`}>Leer publicación <Icon name="arrow" /></Link>
         </article>
       </li>)}</ul> : <div className="publications-pending">
         <span className="publications-pending__rule" aria-hidden="true" />

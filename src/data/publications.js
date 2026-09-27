@@ -3,6 +3,8 @@ export const publications = [
   {
     "slug": "cooperacion-internacional-asistencia-judicial-lavado-activos-ecuador",
     "title": "Cooperación internacional y asistencia judicial en casos de lavado de activos: retos prácticos para Ecuador",
+    "seoTitle": "Cooperación internacional y lavado de activos en Ecuador | Carolina Álvarez",
+    "author": "Abg. Carolina Álvarez",
     "description": "La cooperación internacional y la asistencia judicial frente al lavado de activos: avances normativos y desafíos prácticos para Ecuador.",
     "sourcePdf": "/articulos/ARTICULO-CAROLINA-ALVAREZ.pdf",
     "paragraphs": [
