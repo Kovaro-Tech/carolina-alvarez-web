@@ -20,10 +20,10 @@ export default function Header() {
   const solid = scrolled || open
   const overHero = pathname === '/' && !solid
 
-  return <header className={`header${solid ? ' header--solid' : ''}${overHero ? ' header--over-hero' : ''}`}>
+  return <header onKeyDown={(event) => { if (event.key === 'Escape' && open) { close(); event.currentTarget.querySelector('.menu-toggle').focus() } }} className={`header${solid ? ' header--solid' : ''}${overHero ? ' header--over-hero' : ''}`}>
     <div className="container nav">
       <Brand />
-      <button className="menu-toggle" aria-label={open ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={open} aria-controls="main-navigation" onClick={() => setMenu({ key, open: !open })}><span /><span /></button>
+      <button type="button" className="menu-toggle" aria-label={open ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={open} aria-controls="main-navigation" onClick={() => setMenu({ key, open: !open })}><span /><span /></button>
       <nav id="main-navigation" className={open ? 'nav-links is-open' : 'nav-links'} aria-label="Navegación principal" onKeyDown={(event) => { if (event.key === 'Escape') { close(); event.currentTarget.previousElementSibling.focus() } }}>
         <NavLink to="/" end onClick={close}>Inicio</NavLink>
         <NavLink to="/sobre-mi" onClick={close}>Sobre mí</NavLink>

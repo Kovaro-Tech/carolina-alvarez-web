@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import Icon from '../components/Icon'
 import { practiceAreas } from '../data/practiceAreas'
 import { siteConfig, whatsappUrl } from '../data/siteConfig'
@@ -20,6 +20,11 @@ export default function Contact() {
           <p>Escribe a Carolina para comentar brevemente el motivo de tu consulta y coordinar una cita.</p>
           <a className="button button--primary" href={contactUrl} target="_blank" rel="noopener noreferrer">Escribir por WhatsApp <Icon name="arrow" /></a>
           <p className="contact-page__note">Al escribir, indica el área de consulta, si existe alguna fecha próxima que debamos considerar y tu disponibilidad.</p>
+          <div className="contact-privacy">
+            <p>Los datos enviados serán utilizados únicamente para atender tu solicitud. Consulta la <Link to="/politica-de-privacidad">Política de Privacidad</Link>.</p>
+            <p>Evita incluir información sensible o confidencial innecesaria en tu mensaje. Los detalles del caso podrán tratarse posteriormente por un canal adecuado.</p>
+            <p>El enlace abre WhatsApp o tu aplicación de correo. Tú decides cuándo enviar el mensaje.</p>
+          </div>
         </div>
         <div className="contact-details">
           <a href={contactUrl} target="_blank" rel="noopener noreferrer"><Icon name="phone" /><span><small>WhatsApp</small>{siteConfig.phone}</span></a>

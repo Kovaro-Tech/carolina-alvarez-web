@@ -1,18 +1,19 @@
-/* Home: a short preview with low-contrast linework. */
+/* Home: editorial practice emblems with room above the copy. */
 .home-services-preview { padding: 86px 0; background: var(--mist); }
 .home-services-preview__heading { max-width: 660px; margin-bottom: 38px; }
 .home-services-preview__heading h2 { font-size: clamp(40px,4.5vw,63px); }
 .service-cards { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
 .service-card {
+  --service-card-paper: #fff;
   position: relative; isolation: isolate; overflow: hidden;
   display: flex; flex-direction: column; align-items: flex-start;
   min-height: 340px; padding: 28px;
   color: var(--navy); text-decoration: none;
-  border: 1px solid var(--line); border-radius: 2px; background: #fff;
+  border: 1px solid var(--line); border-radius: 2px; background: var(--service-card-paper);
   transition: transform 260ms var(--ease-out), border-color 260ms ease, box-shadow 260ms ease;
 }
 .service-card:hover { transform: translateY(-3px); border-color: #a8bfd0; box-shadow: 0 10px 24px #071b3308; }
-.service-card__number { font: 17px var(--serif); color: #526f85; margin-bottom: 54px; }
+.service-card__number { font: 17px var(--serif); color: #526f85; margin-bottom: 108px; }
 .service-card__content { margin-top: auto; position: relative; }
 .service-card h3 { font: clamp(27px,2.3vw,34px)/1.08 var(--serif); letter-spacing: -.7px; margin: 0 0 14px; }
 .service-card p { margin: 0; color: #5d7084; font-size: 14px; line-height: 1.75; max-width: 300px; }
@@ -20,21 +21,22 @@
 .service-card__action .icon { width: 15px; transition: transform .25s; }
 .service-card:hover .icon { transform: translateX(4px); }
 .service-card__shape {
-  position: absolute; z-index: -1; pointer-events: none; width: 170px; height: 170px;
-  right: -32px; top: 16px; border: 1px solid #adc3d3; opacity: .7;
-  border-bottom-color: transparent; border-radius: 50%; transform: rotate(-35deg);
-  background: linear-gradient(135deg, #dce7ef40, transparent 65%);
+  position: absolute; z-index: -1; pointer-events: none;
+  width: 240px; max-width: 72%; height: auto;
+  right: 0; top: 8px; color: #658298; opacity: .76;
+  stroke-linecap: round; stroke-linejoin: round;
   transition: opacity 280ms ease, translate 320ms var(--ease-out);
 }
-.service-card__shape::before, .service-card__shape::after { content: ''; position: absolute; border: 1px solid #b7cbd9; border-radius: inherit; }
-.service-card__shape::before { inset: 15px; border-bottom-color: transparent; }
-.service-card__shape::after { inset: 31px; border-bottom-color: transparent; }
-.service-card:is(:hover, :focus-visible) .service-card__shape { opacity: .9; translate: -3px 0; }
-.service-card:nth-child(2) { background: #f7f9fb; }
-.service-card:nth-child(2) .service-card__shape { border-radius: 100px 100px 0 0; width: 148px; height: 145px; right: -16px; top: 20px; transform: rotate(18deg); }
-.service-card:nth-child(2) .service-card__shape::before { bottom: -1px; }
-.service-card:nth-child(2) .service-card__shape::after { bottom: -1px; }
-.service-card:nth-child(3) .service-card__shape { width: 154px; height: 154px; right: -23px; top: 12px; border-radius: 50% 0 50% 50%; border-left-color: transparent; transform: rotate(30deg); }
+.service-card__paper { fill: var(--service-card-paper); }
+.service-card__wash { fill: currentColor; fill-opacity: .1; }
+.service-card__line { stroke: currentColor; stroke-width: 1.5; stroke-opacity: .74; }
+.service-card__axis { stroke: currentColor; stroke-width: 1.75; stroke-opacity: .85; }
+.service-card__guide { stroke: currentColor; stroke-width: 1; stroke-opacity: .48; }
+.service-card:is(:hover, :focus-visible) .service-card__shape { opacity: .86; translate: -2px 0; }
+.service-card--derecho-penal { --service-card-paper: #faf8f3; }
+.service-card--derecho-penal .service-card__shape { color: #7b827e; }
+.service-card--penal-economico { --service-card-paper: #f1f5f8; }
+.service-card--derecho-tributario { --service-card-paper: #fdfdfb; }
 .home-services-preview__link { margin-top: 30px; }
 
 /* Services: a compact index followed by three editorial chapters. */
@@ -74,7 +76,7 @@
   .home-services-preview__heading h2 { font-size: 40px; letter-spacing: -1.5px; }
   .service-cards { grid-template-columns: 1fr; gap: 12px; }
   .service-card { min-height: 255px; padding: 24px; }
-  .service-card__number { margin-bottom: 36px; }
+  .service-card__number { margin-bottom: 100px; }
   .service-card h3 { font-size: 30px; }
   .service-card__action { margin-top: 22px; }
   .services-hero { padding-top: 68px; }

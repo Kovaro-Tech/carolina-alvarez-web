@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import Icon from '../components/Icon'
+import { publications, publicationPath } from '../data/publications'
 
 export default function Publications() {
   return <section className="publications-page">
@@ -7,10 +8,10 @@ export default function Publications() {
       <p className="section-label">Carolina Álvarez / Análisis jurídico</p>
       <h1>Publicaciones<span>.</span></h1>
       <p className="publications-page__intro">Este espacio estará dedicado a artículos, análisis y publicaciones jurídicas.</p>
-      <div className="publications-pending">
+      {publications.length ? <ul>{publications.map((article) => <li key={article.slug}><Link to={publicationPath(article)}>{article.title}</Link><p>{article.description}</p></li>)}</ul> : <div className="publications-pending">
         <span className="publications-pending__rule" aria-hidden="true" />
         <div><h2>Próximamente</h2><p>Las nuevas publicaciones estarán disponibles aquí.</p></div>
-      </div>
+      </div>}
       <Link className="text-link" to="/sobre-mi">Conocer la trayectoria de Carolina <Icon name="arrow" /></Link>
     </div>
   </section>
