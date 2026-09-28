@@ -19,7 +19,7 @@ export default function About() {
           <a className="text-link" href="#formacion">Explorar trayectoria <Icon name="arrow" /></a>
         </div>
         <figure className="about-open__figure">
-          <img src="/images/carolina_4.webp" alt="Carolina Álvarez sentada en un retrato de estudio" width="4160" height="6240" fetchPriority="high" />
+          <img src="/images/carolina_4-760.webp" srcSet="/images/carolina_4-380.webp 380w, /images/carolina_4-760.webp 760w, /images/carolina_4-1140.webp 1140w" sizes="(max-width: 760px) min(340px, calc(100vw - 38px)), (max-width: 1000px) min(380px, calc((100vw - 108px) / 2)), min(380px, calc((100vw - 154px) / 2))" alt="Carolina Álvarez sentada en un retrato de estudio" width="760" height="1140" fetchPriority="high" />
           <figcaption>Carolina Álvarez <span>Abogada</span></figcaption>
         </figure>
       </div>

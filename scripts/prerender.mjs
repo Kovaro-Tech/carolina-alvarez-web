@@ -10,6 +10,8 @@ import { SITE_URL, siteConfig } from '../src/data/siteConfig.js'
 const output = resolve('dist')
 const template = await readFile(resolve(output, 'index.html'), 'utf8')
 assert(template.includes('<!--page-head-->'), 'Missing metadata placeholder')
+const siteOrigin = new URL(SITE_URL)
+assert(siteOrigin.protocol === 'https:' && siteOrigin.origin === SITE_URL, 'SITE_URL must be an HTTPS origin without a trailing slash, path or credentials')
 for (const article of publications) {
   assert(/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(article.slug), 'Use a URL-safe article slug')
   assert(article.title && article.description && article.paragraphs?.length, 'Articles need approved content')
@@ -30,7 +32,7 @@ try {
     const data = structuredData(path)
     if (data) JSON.parse(head.match(/<script[^>]*>(.*?)<\/script>/s)[1])
     const html = template.replace('<!--page-head-->', () => head).replace('<div id="root"></div>', () => `<div id="root">${body}</div>`)
-    // Vercel cleanUrls serves /sobre-mi.html at /sobre-mi with a real HTTP 200.
+    // Cloudflare Static Assets serves /sobre-mi.html at /sobre-mi with HTTP 200.
     const file = resolve(output, path === '/' ? 'index.html' : `${path.slice(1)}.html`)
     await mkdir(dirname(file), { recursive: true })
     await writeFile(file, html)
@@ -47,6 +49,9 @@ await writeFile(resolve(output, 'site.webmanifest'), JSON.stringify({
   id: '/', name: `${siteConfig.name} | Abogada`, short_name: siteConfig.name,
   lang: 'es', start_url: '/', scope: '/', display: 'browser',
   background_color: '#ffffff', theme_color: '#071b33',
-  icons: [{ src: siteConfig.icons.svg, sizes: 'any', type: 'image/svg+xml', purpose: 'any' }],
+  icons: [
+    { src: siteConfig.icons.icon192, sizes: '192x192', type: 'image/png', purpose: 'any' },
+    { src: siteConfig.icons.icon512, sizes: '512x512', type: 'image/png', purpose: 'any' },
+  ],
 }, null, 2))
 console.log(`Rendered ${publicPaths().length} public pages and 404; sitemap contains ${indexable.length} URLs.`)

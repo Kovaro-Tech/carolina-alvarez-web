@@ -11,6 +11,16 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+.env.*
+!.env.example
+.vercel/
+.wrangler/
+.dev.vars
+.dev.vars.*
+__pycache__/
+*.tmp
+*.temp
 
 # Editor directories and files
 .vscode/*

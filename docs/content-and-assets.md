@@ -20,4 +20,8 @@ La [referencia de David Celi Lupera](https://davidcelilupera.ec/) se utilizó co
 
 Contacto usa los datos existentes de `src/data/siteConfig.js`. Los CTA de Servicios conservan el área elegida y preparan el texto de WhatsApp y el asunto del correo. El formulario anterior solo simulaba una confirmación de envío; se sustituyó por estos canales directos.
 
-`/publicaciones` es una ruta independiente con metadatos y navegación. Presenta un estado vacío explícito, sin artículos ficticios.
+`/publicaciones` presenta el primer artículo real de Carolina sobre cooperación internacional y lavado de activos, con página individual y metadatos. Carolina confirmó el 15 de junio de 2025 como fecha real y autorizó el texto completo. El PDF fuente se conserva en `docs/sources/`, fuera de los assets públicos, porque contiene atribución y branding de terceros.
+
+## Exportaciones de producción
+
+`scripts/export-assets.py` exporta iconos cuadrados transparentes desde el logo existente, variantes WebP del retrato de Sobre mí y una imagen social 1200 × 630 con logo y nombre. Los originales se conservan y el diseño de las páginas no cambia. Los archivos exportados están versionados; Python/Pillow y Georgia de Windows solo se necesitan para regenerarlos, no para el build.

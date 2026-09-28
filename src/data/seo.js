@@ -24,13 +24,14 @@ export function getPageMeta(pathname) {
 
 export function structuredData(pathname) {
   const meta = getPageMeta(pathname)
-  const person = { '@type': 'Person', '@id': `${SITE_URL}/#carolina`, name: siteConfig.name, jobTitle: 'Abogada', url: SITE_URL, email: siteConfig.email, telephone: siteConfig.telephone,
+  const address = { '@type': 'PostalAddress', streetAddress: 'IQON, Av. Shyris y Suecia', addressLocality: 'Quito', addressCountry: 'EC' }
+  const person = { '@type': 'Person', '@id': `${SITE_URL}/#carolina`, name: siteConfig.legalName, alternateName: siteConfig.name, address, jobTitle: 'Abogada', url: SITE_URL, email: siteConfig.email, telephone: siteConfig.telephone,
     ...(siteConfig.linkedinVerified ? { sameAs: [siteConfig.linkedin] } : {}) }
   if (normalizePath(pathname) === '/') return { '@context': 'https://schema.org', '@graph': [person, {
-    '@type': 'LegalService', '@id': `${SITE_URL}/#servicio-juridico`, name: siteConfig.name,
+    '@type': 'LegalService', '@id': `${SITE_URL}/#servicio-juridico`, name: siteConfig.legalName, alternateName: siteConfig.name,
     url: `${SITE_URL}/`, email: siteConfig.email, telephone: siteConfig.telephone,
     description: pageMeta['/'].description, image: new URL(siteConfig.socialImage.path, SITE_URL).href,
-    address: { '@type': 'PostalAddress', addressLocality: 'Quito', addressCountry: 'EC' },
+    address,
     ...(siteConfig.linkedinVerified ? { sameAs: [siteConfig.linkedin] } : {}),
   }] }
   if (meta.article) return { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: meta.article.title,
@@ -55,6 +56,9 @@ export function headEntries(pathname) {
     ['name', 'twitter:image:alt', siteConfig.socialImage.alt],
   ]
   if (meta.canonical) entries.push(['property', 'og:url', meta.canonical])
+  if (meta.article?.datePublished) entries.push(['property', 'article:published_time', meta.article.datePublished])
+  if (meta.article?.dateModified) entries.push(['property', 'article:modified_time', meta.article.dateModified])
+  if (meta.article) entries.push(['name', 'author', meta.article.author])
   if (!meta.article?.image) entries.push(['property', 'og:image:width', String(siteConfig.socialImage.width)], ['property', 'og:image:height', String(siteConfig.socialImage.height)], ['property', 'og:image:type', siteConfig.socialImage.type])
   return entries
 }
@@ -71,8 +75,7 @@ export function renderHead(pathname) {
     ...headEntries(pathname).map(([kind, key, content]) => `<meta data-page-meta ${kind}="${key}" content="${escapeHtml(content)}" />`),
     meta.canonical ? `<link data-page-meta rel="canonical" href="${escapeHtml(meta.canonical)}" />` : '',
     data ? `<script data-page-meta type="application/ld+json">${serializeJsonLd(data)}</script>` : '',
-    `<link rel="icon" type="image/svg+xml" href="${icons.svg}" />`,
-    icons.ico ? `<link rel="icon" sizes="any" href="${icons.ico}" />` : '',
+    icons.ico ? `<link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href="${icons.ico}" />` : '',
     icons.png32 ? `<link rel="icon" type="image/png" sizes="32x32" href="${icons.png32}" />` : '',
     icons.png16 ? `<link rel="icon" type="image/png" sizes="16x16" href="${icons.png16}" />` : '',
     icons.apple ? `<link rel="apple-touch-icon" sizes="180x180" href="${icons.apple}" />` : '',

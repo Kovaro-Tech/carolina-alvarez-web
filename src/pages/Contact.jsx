@@ -24,12 +24,14 @@ export default function Contact() {
             <p>Los datos enviados serán utilizados únicamente para atender tu solicitud. Consulta la <Link to="/politica-de-privacidad">Política de Privacidad</Link>.</p>
             <p>Evita incluir información sensible o confidencial innecesaria en tu mensaje. Los detalles del caso podrán tratarse posteriormente por un canal adecuado.</p>
             <p>El enlace abre WhatsApp o tu aplicación de correo. Tú decides cuándo enviar el mensaje.</p>
+            <p>El contenido de este sitio tiene fines informativos y no constituye asesoría jurídica para un caso específico. El envío de una consulta no implica por sí solo el establecimiento de una relación profesional.</p>
           </div>
         </div>
         <div className="contact-details">
           <a href={contactUrl} target="_blank" rel="noopener noreferrer"><Icon name="phone" /><span><small>WhatsApp</small>{siteConfig.phone}</span></a>
           <a href={emailUrl}><Icon name="mail" /><span><small>Correo electrónico</small>{siteConfig.email}</span></a>
-          <div><Icon name="pin" /><span><small>Ubicación y modalidad</small>{siteConfig.location}<span className="contact-modality">{siteConfig.modality}</span></span></div>
+          <div><Icon name="pin" /><span><small>Ubicación y modalidad</small>{siteConfig.legalAddress}<span className="contact-modality">{siteConfig.modality}</span></span></div>
+          <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer"><Icon name="arrow" /><span><small>Perfil profesional</small>LinkedIn</span></a>
         </div>
       </div>
     </div>

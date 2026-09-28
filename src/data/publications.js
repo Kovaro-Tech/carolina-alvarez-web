@@ -1,12 +1,12 @@
-// Source: client-supplied PDF. No publication date is stated in the document.
+// Full publication and its date were confirmed by Carolina for her personal site.
 export const publications = [
   {
     "slug": "cooperacion-internacional-asistencia-judicial-lavado-activos-ecuador",
     "title": "Cooperación internacional y asistencia judicial en casos de lavado de activos: retos prácticos para Ecuador",
     "seoTitle": "Cooperación internacional y lavado de activos en Ecuador | Carolina Álvarez",
-    "author": "Abg. Carolina Álvarez",
+    "author": "Carolina Álvarez",
+    "datePublished": "2025-06-15",
     "description": "La cooperación internacional y la asistencia judicial frente al lavado de activos: avances normativos y desafíos prácticos para Ecuador.",
-    "sourcePdf": "/articulos/ARTICULO-CAROLINA-ALVAREZ.pdf",
     "paragraphs": [
       "El lavado de activos es, por naturaleza, un delito transnacional. Su comisión implica el movimiento de capitales a través de diferentes jurisdicciones, con el propósito de ocultar el origen ilícito de los bienes y conferirles una apariencia de legalidad. Este carácter global convierte a la cooperación internacional y a la asistencia judicial en pilares fundamentales para su persecución efectiva. En el caso de Ecuador, los avances normativos e institucionales son innegables; sin embargo, los desafíos prácticos persisten y limitan la eficacia de los esfuerzos estatales."
     ],

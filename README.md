@@ -1,16 +1,25 @@
-# React + Vite
+# Carolina Álvarez — sitio profesional
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React, Vite y React Router con HTML prerenderizado. Producción: Cloudflare Workers + Static Assets en https://carolinaalvarez.ec.
 
-Currently, two official plugins are available:
+```sh
+npm ci
+npm run dev
+npm run build
+npm run lint
+npm audit
+npm run check:cloudflare
+npm run preview:cloudflare
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Build genera dist con ocho páginas públicas, 404, sitemap, robots y manifest. Cloudflare usa wrangler.jsonc y worker.js para rutas, redirección permanente www/HTTPS y headers. No hay formulario ni API de consultas; Contacto abre WhatsApp o correo.
 
-## React Compiler
+Una vez activados dominio y correo, autenticar con `npx wrangler login` y ejecutar `npm run deploy` sobre el build validado. Estos comandos no se ejecutaron automáticamente. En Workers Builds: build `npm run build`, deploy `npm run deploy`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+SITE_URL, identidad, contactos, LinkedIn, iconos e imagen social se centralizan en src/data/siteConfig.js. Añadir artículos aprobados a src/data/publications.js; build integra sus rutas, JSON-LD y sitemap.
 
-## Expanding the ESLint configuration
+Los assets exportados están versionados. Solo para regenerarlos: `python scripts/export-assets.py` (Pillow y Georgia de Windows); el deploy no requiere Python. Los originales se conservan. El PDF fuente se archiva en docs/sources y no se publica.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+vercel.json se conserva exclusivamente para el entorno temporal. No configura la producción en Cloudflare.
+
+Consultar la [checklist final](docs/production.md) para DNS, correo, HTTPS, privacidad, Search Console y resultados de validación.
