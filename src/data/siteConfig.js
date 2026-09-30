@@ -1,5 +1,5 @@
 // Canonical production origin, shared by metadata, prerendering and the Worker.
-export const SITE_URL = 'https://carolinaalvarez.ec'
+export const SITE_URL = 'https://carolinaalvareze.com'
 
 export const siteConfig = {
   url: SITE_URL,
@@ -8,8 +8,7 @@ export const siteConfig = {
   legalAddress: 'IQON, Av. Shyris y Suecia, Quito, Ecuador',
   phone: '0994568705',
   telephone: '+593994568705',
-  // Activate and test this address before launching the final domain.
-  email: 'contacto@carolinaalvarez.ec',
+  email: 'carolinaanaalvarez15@gmail.com',
   location: 'Quito, Ecuador',
   modality: 'Atención presencial y virtual',
   whatsapp: '593994568705',

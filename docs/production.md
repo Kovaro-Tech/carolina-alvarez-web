@@ -14,13 +14,13 @@ La configuración central está en `src/data/siteConfig.js`:
 - Nombre profesional: Carolina Álvarez.
 - Domicilio profesional/legal: IQON, Av. Shyris y Suecia, Quito, Ecuador.
 - Teléfono: 0994568705; internacional +593994568705; WhatsApp 593994568705.
-- Correo único publicado: contacto@carolinaalvarez.ec. **Debe crearse y probarse antes del lanzamiento.**
+- Correo único publicado: carolinaanaalvarez15@gmail.com. Gmail actual confirmado; todavía no existe correo con dominio propio.
 - LinkedIn confirmado: https://www.linkedin.com/in/carolina-%C3%A1lvarez-2231402a1/; `linkedinVerified: true`.
-- Dominio principal: https://carolinaalvarez.ec, sin www.
+- Dominio principal: https://carolinaalvareze.com, sin www.
 
-Privacidad usa el nombre completo y domicilio confirmado; Contacto, footer, mailto y JSON-LD usan el correo profesional. LinkedIn aparece en footer, Contacto y sameAs. No se inventó oficina, piso, RUC, código postal, horario o coordenadas.
+Privacidad usa el nombre completo y domicilio confirmado; Contacto, footer, mailto y JSON-LD usan el Gmail confirmado. LinkedIn aparece en footer, Contacto y sameAs. No se inventó oficina, piso, RUC, código postal, horario o coordenadas.
 
-La política describe Cloudflare como alojamiento del dominio principal y WhatsApp como canal. No atribuye el correo a un proveedor todavía no elegido: deberá completarse cuando se active. Se mantienen derechos, finalidades, conservación por finalidad, seguridad y transferencias; aún faltan plazos operativos y garantías concretas. No se presenta esta preparación técnica como certificación jurídica.
+La política describe Cloudflare como alojamiento del dominio principal y WhatsApp como canal. El correo de contacto es el Gmail confirmado y la política identifica Gmail (Google) como proveedor. Se mantienen derechos, finalidades, conservación por finalidad, seguridad y transferencias; aún faltan plazos operativos y garantías concretas. No se presenta esta preparación técnica como certificación jurídica.
 
 No hay formulario ni API de consultas. Los visitantes abren WhatsApp o correo y confirman allí el envío. Se mantienen minimización, enlace a Privacidad y aviso de que la consulta no crea una relación profesional.
 
@@ -72,7 +72,7 @@ La navegación probada en el runtime local de Cloudflare no creó cookies ni loc
 ## B. Todo listo para deploy — alcance técnico
 
 - [x] Build: ocho páginas públicas y 404; sitemap con seis URL.
-- [x] Todas las canonical, og:url, JSON-LD, imágenes sociales, sitemap y robots usan carolinaalvarez.ec.
+- [x] Todas las canonical, og:url, JSON-LD, imágenes sociales, sitemap y robots usan carolinaalvareze.com.
 - [x] Políticas noindex fuera del sitemap; robots permite indexación pública y assets.
 - [x] Article con fecha confirmada, autora, metadatos y LinkedIn.
 - [x] Iconos, manifest e imagen social exportados y enlazados.
@@ -85,10 +85,10 @@ La navegación probada en el runtime local de Cloudflare no creó cookies ni loc
 - [x] Headers comprobados en respuestas 200/404.
 - [x] Dieciocho comprobaciones Axe (nueve rutas × escritorio/móvil) sin infracciones; sin overflow, imágenes rotas o errores JavaScript/CSP.
 - [x] Menú móvil, Escape/devolución de foco y navegación con reduced motion comprobados.
-- [ ] Activar el dominio, certificado y correo y repetir comprobaciones públicas.
-- [ ] Completar condiciones reales del proveedor de correo y conservación.
+- [ ] Activar el dominio y certificado y repetir comprobaciones públicas.
+- [ ] Completar condiciones reales de conservación del correo.
 
-El 28 de septiembre, la consulta DNS de A, NS y MX de carolinaalvarez.ec devolvió ENOTFOUND desde este entorno. No se afirma que esté registrado, conectado o que el buzón funcione. La prueba local tampoco valida certificados o recepción de correo.
+El estado DNS del dominio definitivo no se ha comprobado en esta corrección. La prueba local no valida su conexión ni los certificados. El correo público confirmado sigue siendo carolinaanaalvarez15@gmail.com.
 
 ### Comandos preparados
 
@@ -114,12 +114,12 @@ Deploy usa el dist ya construido. En Workers Builds con Git: repositorio actual,
 
 ## C. Pasos manuales en Cloudflare
 
-1. Registrar o comprobar la titularidad de **carolinaalvarez.ec**.
+1. Registrar o comprobar la titularidad de **carolinaalvareze.com**.
 2. En Cloudflare, añadir/conectar el dominio a la cuenta que alojará el Worker. Revisar los registros importados antes de cambiar nada. Si el registrador es externo, sustituir los nameservers por los dos exactos indicados para esa zona. Si ya está gestionado en Cloudflare, no cambiarlos innecesariamente. Revisar DNSSEC/DS durante una migración. [Alta de dominio](https://developers.cloudflare.com/fundamentals/manage-domains/add-site/).
 3. Preservar los MX y TXT de correo existentes (SPF, DKIM, DMARC y verificaciones). No sustituirlos para conectar la web.
-4. Con la zona activa en la misma cuenta, desplegar el Worker. `wrangler.jsonc` declara Custom Domains **carolinaalvarez.ec** y **www.carolinaalvarez.ec**. Cloudflare crea los registros y certificados correspondientes; **no inventar A/CNAME ni apuntar a una IP de Vercel**. Si existe un registro web conflictivo, revisar y retirar solo ese registro, conservando correo. [Custom Domains](https://developers.cloudflare.com/workers/configuration/routing/custom-domains/).
+4. Con la zona activa en la misma cuenta, desplegar el Worker. Conectar desde el panel los Custom Domains **carolinaalvareze.com** y **www.carolinaalvareze.com** cuando corresponda; `wrangler.jsonc` no declara dominios ni configura DNS. Cloudflare gestiona los registros y certificados correspondientes; **no inventar A/CNAME ni apuntar a una IP de Vercel**. Si existe un registro web conflictivo, revisar y retirar solo ese registro, conservando correo. [Custom Domains](https://developers.cloudflare.com/workers/configuration/routing/custom-domains/).
 5. En Workers & Pages → carolina-alvarez-web → Settings → Domains & Routes, comprobar ambos dominios. Si se conectan desde el panel, elegir Custom Domain con esos mismos nombres, sin rutas wildcard.
-6. El Worker ya hace **www → sin www con 308**. No crear otra regla equivalente. Verificar que `https://www.carolinaalvarez.ec/contacto?area=penal` apunta a `https://carolinaalvarez.ec/contacto?area=penal`.
+6. El Worker ya hace **www → sin www con 308**. No crear otra regla equivalente. Verificar que `https://www.carolinaalvareze.com/contacto?area=penal` apunta a `https://carolinaalvareze.com/contacto?area=penal`.
 7. Comprobar certificado activo en raíz y www, HTTPS y HTTP → HTTPS. El Worker cubre ambos hosts; Always Use HTTPS de la zona es una opción adicional, no necesaria para duplicar la regla existente. No configurar modo Flexible para un origen externo. Este despliegue sirve directamente desde Workers/Static Assets. [HTTPS en Cloudflare](https://developers.cloudflare.com/ssl/edge-certificates/additional-options/always-use-https/).
 8. Tras verificar HTTPS, evaluar HSTS en SSL/TLS → Edge Certificates, inicialmente con plazo prudente, **sin preload/includeSubDomains**. No duplicar el header en Worker y panel.
 9. Repetir rutas 200/404, headers, cookies, iconos, teléfonos, correo, LinkedIn, sitemap y canonical en el dominio final. Probar lectura/teclado en dispositivos reales y revisar el artículo.
@@ -133,26 +133,21 @@ Deploy usa el dist ya construido. En Workers Builds con Git: repositorio actual,
 - Tras retirar definitivamente el entorno temporal se puede eliminar vercel.json. No es necesario hacerlo ahora.
 - El enlace de crédito a kovarotech.com se conserva: es un enlace comercial existente, no el subdominio temporal.
 
-## D. Crear contacto@carolinaalvarez.ec
+## D. Correo actual y futuro
 
-1. Elegir si se necesita solo recepción/reenvío o un buzón con envío.
-2. Para recepción: Cloudflare → Email Service / Email Routing → incorporar carolinaalvarez.ec. Verificar la dirección de destino autorizada por Carolina.
-3. Crear la dirección personalizada **contacto@carolinaalvarez.ec** y la regla de reenvío al destino verificado. Revisar los MX/TXT exactos que Cloudflare propone. Si existe otro proveedor de correo, resolver esa migración antes de reemplazar MX; no mantener SPF duplicados.
-4. Probar recepción desde una cuenta externa y comprobar spam, entrega y respuesta. No se enviaron correos de prueba automáticamente.
-5. **Email Routing por sí solo no es un buzón SMTP completo.** Para enviar como contacto@ se necesita un servicio de envío/buzón adecuado y configurar autenticación SPF/DKIM/DMARC según ese proveedor. No confundir reenvío con una identidad de remitente ya operativa.
-6. Registrar proveedor elegido, destino del reenvío, personas con acceso, retención y garantías de transferencias. Actualizar Privacidad para describir esa operación real antes del lanzamiento.
+El único correo público activo es **carolinaanaalvarez15@gmail.com**, centralizado en `siteConfig`. No se crea ni se presupone ningún buzón con dominio propio.
 
-Referencias: [configurar Email Routing](https://developers.cloudflare.com/email-service/get-started/route-emails/) y [registros para enviar/recibir correo](https://developers.cloudflare.com/dns/manage-dns-records/how-to/email-records/). No se instaló ni contrató ningún servicio de correo.
+Pendiente futuro: Cuando Carolina configure correo profesional con el dominio, reemplazar el Gmail centralizado en siteConfig. Actualizar entonces la Política de Privacidad según el proveedor y la operación reales.
 
 ## E. Search Console — manual
 
-1. Desplegar carolinaalvarez.ec.
+1. Desplegar carolinaalvareze.com.
 2. Comprobar HTTPS y acceso público sin autenticación.
 3. Crear propiedad de tipo **Dominio** en Google Search Console.
 4. Verificar con el TXT exacto proporcionado por Google.
-5. Enviar **https://carolinaalvarez.ec/sitemap.xml**.
-6. Inspeccionar **https://carolinaalvarez.ec/**.
-7. Inspeccionar **https://carolinaalvarez.ec/publicaciones/cooperacion-internacional-asistencia-judicial-lavado-activos-ecuador**.
+5. Enviar **https://carolinaalvareze.com/sitemap.xml**.
+6. Inspeccionar **https://carolinaalvareze.com/**.
+7. Inspeccionar **https://carolinaalvareze.com/publicaciones/cooperacion-internacional-asistencia-judicial-lavado-activos-ecuador**.
 8. Solicitar indexación de ambas.
 9. Revisar posteriormente indexación y canonical elegida. La solicitud no garantiza indexación inmediata; las políticas deben seguir excluidas por noindex.
 
@@ -161,7 +156,7 @@ Referencias: [configurar Email Routing](https://developers.cloudflare.com/email-
 ## F. Datos que siguen faltando
 
 - Acceso/estado real del dominio y cuenta Cloudflare; rama de despliegue confirmada.
-- Activación del correo, proveedor de envío si se necesita y destino autorizado del reenvío.
+- Correo profesional con dominio propio: pendiente futuro; no es requisito para publicar con el Gmail confirmado.
 - Plazos operativos de conservación/borrado, personas autorizadas y garantías contractuales de transferencias.
 - Confirmar si corresponde delegado de protección de datos para la actividad y, si aplica, sus datos.
 - No faltan nombre, domicilio, teléfono, LinkedIn, fecha ni autorización del artículo: ya están confirmados.

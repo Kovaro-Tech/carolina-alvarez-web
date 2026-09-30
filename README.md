@@ -32,6 +32,10 @@ Se conserva el Worker existente con `run_worker_first: true` para mantener heade
 
 SITE_URL, identidad, contactos, LinkedIn, iconos e imagen social se centralizan en src/data/siteConfig.js. Añadir artículos aprobados a src/data/publications.js; build integra sus rutas, JSON-LD y sitemap.
 
+El dominio definitivo es **https://carolinaalvareze.com**, sin www. El Worker redirige **https://www.carolinaalvareze.com** al dominio principal con **308**, conservando ruta y parámetros, cuando ambos dominios estén conectados desde Cloudflare. No se configura DNS desde código.
+
+El único correo público activo es **carolinaanaalvarez15@gmail.com**. Cuando Carolina configure correo profesional con el dominio, reemplazar el Gmail centralizado en siteConfig.
+
 Los assets exportados están versionados. Solo para regenerarlos: `python scripts/export-assets.py` (Pillow y Georgia de Windows); el deploy no requiere Python. Los originales se conservan. El PDF fuente se archiva en docs/sources y no se publica.
 
 vercel.json se conserva exclusivamente para el entorno temporal. No configura la producción en Cloudflare.
