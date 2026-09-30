@@ -23,7 +23,8 @@ export default {
       response.headers.set('Cache-Control', 'public, max-age=31536000, immutable')
     }
     if (response.status === 404) response.headers.set('X-Robots-Tag', 'noindex')
-    // Enable HSTS at the Cloudflare zone only after verifying the final HTTPS certificate.
+    // Preserve the temporary host's HSTS policy on HTTPS, without affecting local HTTP.
+    if (url.protocol === 'https:') response.headers.set('Strict-Transport-Security', 'max-age=31536000')
     return response
   },
 }

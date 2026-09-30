@@ -1,5 +1,7 @@
 # Preparación final de producción — Carolina Álvarez
 
+> Actualización de despliegue (29 de septiembre de 2026): esta revisión se conserva como registro histórico. La configuración vigente y los pasos de Workers Builds están en [README.md](../README.md). Wrangler ya no declara Custom Domains; workers.dev y previews están habilitados. El Worker conserva los headers y añade HSTS en HTTPS, por lo que no debe duplicarse desde el panel. Las indicaciones anteriores sobre dominios declarados, previews deshabilitados y HSTS pendiente quedan sustituidas por el README.
+
 Revisión: 28 de septiembre de 2026. **Código preparado para Cloudflare Workers + Static Assets; no desplegado.** No se modificaron DNS, cuentas, correo ni Search Console. Sin screenshots, trackers o rediseño.
 
 ## A. Cambios realizados
