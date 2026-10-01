@@ -11,6 +11,17 @@ import { renderPageResources } from '../src/data/pageResources.js'
 const output = resolve('dist')
 const template = await readFile(resolve(output, 'index.html'), 'utf8')
 assert(template.includes('<!--page-head-->'), 'Missing metadata placeholder')
+// Home ships the complete, small stylesheet once, before its prerendered body.
+// Preserve the cascade and all responsive/interactive states without deferred CSS.
+// Inner pages keep the independently cacheable external stylesheet.
+const stylesheetLinks = [...template.matchAll(/<link\b[^>]*rel="stylesheet"[^>]*>/g)]
+assert.equal(stylesheetLinks.length, 1, 'Revisit Home CSS inlining if CSS splitting changes')
+const stylesheetLink = stylesheetLinks[0][0]
+const stylesheetHref = stylesheetLink.match(/href="([^"]+)"/)[1]
+assert(stylesheetHref.startsWith('/assets/'), 'Expected a local bundled stylesheet')
+const stylesheet = await readFile(resolve(output, stylesheetHref.slice(1)), 'utf8')
+assert(!/<\/style/i.test(stylesheet), 'Unsafe inline stylesheet content')
+const homeTemplate = template.replace(stylesheetLink, () => `<style data-home-styles>${stylesheet}</style>`)
 const siteOrigin = new URL(SITE_URL)
 assert(siteOrigin.protocol === 'https:' && siteOrigin.origin === SITE_URL, 'SITE_URL must be an HTTPS origin without a trailing slash, path or credentials')
 for (const article of publications) {
@@ -32,7 +43,7 @@ try {
     assert.equal((head.match(/<title>/g) || []).length, 1)
     const data = structuredData(path)
     if (data) JSON.parse(head.match(/<script[^>]*>(.*?)<\/script>/s)[1])
-    const html = template.replace('<!--page-head-->', () => head)
+    const html = (path === '/' ? homeTemplate : template).replace('<!--page-head-->', () => head)
       .replace('<!--page-resources-->', () => renderPageResources(path))
       .replace('<div id="root"></div>', () => `<div id="root">${body}</div>`)
     // Cloudflare Static Assets serves /sobre-mi.html at /sobre-mi with HTTP 200.

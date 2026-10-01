@@ -52,6 +52,7 @@ export default function NavigationShell({ children }) {
   const sequence = useRef(0)
   const motion = useRef(null)
   const exit = useRef(null)
+  const headerHeight = useRef(null)
 
   useLayoutEffect(() => {
     const original = window.history.scrollRestoration
@@ -59,12 +60,15 @@ export default function NavigationShell({ children }) {
     const remember = () => saveEntry(activeKey.current, { y: window.scrollY })
     const persist = () => { remember(); persistEntries() }
     const header = shell.current.querySelector('.header')
-    const measureHeader = () => {
-      document.documentElement.style.setProperty('--navigation-header-height', `${header.offsetHeight}px`)
+    const measureHeader = ([entry]) => {
+      // ResizeObserver already measured the border box: no synchronous layout read.
+      const height = entry.borderBoxSize?.[0]?.blockSize
+      if (!Number.isFinite(height) || height === headerHeight.current) return
+      headerHeight.current = height
+      document.documentElement.style.setProperty('--navigation-header-height', `${height}px`)
     }
     const observer = new ResizeObserver(measureHeader)
-    observer.observe(header)
-    measureHeader()
+    observer.observe(header, { box: 'border-box' })
     window.addEventListener('scroll', remember, { passive: true })
     window.addEventListener('pagehide', persist)
     return () => {
@@ -95,7 +99,8 @@ export default function NavigationShell({ children }) {
     // This layout effect runs after all route DOM (including accordion state)
     // is committed and before paint. No timed guess about mounting is needed.
     const target = findAnchor(location.hash)
-    const offset = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--navigation-header-height')) + 24
+    // Only anchors need geometry; ordinary navigation needs no style/layout read.
+    const offset = target ? (headerHeight.current ?? Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--navigation-header-height'))) + 24 : 0
     const destination = target ? bounded(target.getBoundingClientRect().top + window.scrollY - offset) : 0
     const animate = !reducedMotion() && action !== 'POP'
 
