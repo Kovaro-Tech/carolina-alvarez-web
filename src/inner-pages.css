@@ -1,0 +1,85 @@
+/* Surfaces use the existing navy, mist, hero blue and editorial card palette.
+   Scope every rule to inner pages so Home, About and legal pages stay intact. */
+:is(.services-hero, .service-chapters, .publications-page, .publication-detail, .contact-page) {
+  --surface-navy: var(--navy);
+  --surface-blue-soft: #f1f5f8;
+  --surface-blue-muted: #eef5fa;
+  --surface-cream: #faf8f3;
+}
+
+.services-hero { background: var(--surface-blue-soft); padding-bottom: 32px; }
+.services-index {
+  background: var(--surface-blue-muted); color: var(--navy);
+  padding: 22px 26px; border-bottom: 0;
+}
+.services-index a span, .service-chapter__number { color: var(--navy); }
+.service-chapter--derecho-penal { background: #fff; }
+.service-chapter--penal-economico { background: var(--surface-blue-soft); }
+.service-chapter--derecho-tributario { background: var(--surface-cream); }
+
+.publications-page { padding: 0 0 72px; background: var(--surface-blue-soft); }
+.publications-page__heading { padding: 72px 0 48px; background: var(--surface-navy); }
+.publications-page__heading .section-label { color: #bbd3e5; }
+.publications-page__heading h1 { color: #fff; }
+.publications-page__heading h1 span { color: #bbd3e5; }
+.publications-page__heading .publications-page__intro { color: #e0e8ef; margin-bottom: 0; }
+.publications-page__content { padding-top: 40px; }
+.publications-list { max-width: 850px; border-top: 2px solid var(--navy); }
+.publications-list li { padding: 32px 0 36px; }
+.publications-list li + li { border-top: 1px solid var(--navy); }
+.publications-list .publication-date { color: var(--navy); }
+.publications-list article { border-left: 3px solid var(--line); padding-left: 26px; }
+.publications-pending { border-top-color: var(--navy); }
+
+.publication-detail { background: var(--surface-cream); padding-bottom: 48px; min-height: 65svh; }
+.publication-detail__return, .publication-detail__heading-inner { max-width: 850px; }
+.publication-detail__return { padding-top: 24px; padding-bottom: 24px; }
+.publication-detail .publication-back { margin: 0; overflow-wrap: anywhere; }
+.publication-detail .publication-heading { background: var(--deep); border: 0; padding: 48px 0; }
+.publication-detail .section-label { color: #bbd3e5; }
+.publication-detail h1 {
+  color: #fff; font: clamp(42px, 5vw, 68px)/1.08 var(--serif);
+  letter-spacing: -1.8px; margin: 0 0 26px; overflow-wrap: anywhere;
+}
+.publication-heading .publication-author, .publication-heading .publication-date { color: #e0e8ef; }
+.publication-detail .publication-summary { color: #e0e8ef; margin: 24px 0 0; }
+.publication-detail .publication-body { margin-top: 40px; margin-bottom: 16px; }
+.publication-body p { color: #52677b; }
+.publication-body h2 {
+  font: 29px/1.25 var(--serif); letter-spacing: -.5px; margin: 38px 0 16px;
+  padding-top: 24px; border-top: 1px solid var(--line);
+}
+
+.contact-page { background: var(--surface-blue-soft); }
+.contact-page__layout { gap: 72px; }
+.contact-details { gap: 0; background: var(--surface-cream); }
+.contact-details > a, .contact-details > div {
+  padding: 24px 28px; border-bottom: 1px solid var(--line); color: var(--navy);
+}
+.contact-details > :last-child { border-bottom: 0; }
+.contact-details > a:first-child { background: var(--surface-navy); color: #fff; }
+.contact-details > a:first-child small { color: #bbd3e5; }
+.contact-details > a:first-child:focus-visible { outline-color: #bbd3e5; outline-offset: -5px; }
+.contact-details small { color: var(--navy); }
+.contact-details > a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.contact-details > div > span { min-width: 0; overflow-wrap: anywhere; }
+
+@media (min-width: 761px) and (max-width: 1000px) {
+  .contact-page__layout { gap: 40px; }
+}
+@media (max-width: 760px) {
+  .services-hero { padding-bottom: 24px; }
+  .services-index { padding: 12px 18px; }
+  .service-chapters { padding: 0; }
+  .service-chapter--derecho-tributario { padding-bottom: 32px; }
+  .publications-page { padding-bottom: 48px; }
+  .publications-page__heading { padding: 48px 0 36px; }
+  .publications-page__content { padding-top: 28px; }
+  .publications-list article { padding-left: 18px; }
+  .publication-detail .publication-heading { padding: 36px 0; }
+  .publication-detail h1 { font-size: clamp(34px, 8vw, 48px); letter-spacing: -1.2px; }
+  .publication-detail .publication-body { margin-top: 28px; }
+  .contact-page__layout { gap: 32px; }
+  .contact-details { padding-top: 0; border-top: 0; }
+  .contact-details > a, .contact-details > div { padding: 22px; }
+}

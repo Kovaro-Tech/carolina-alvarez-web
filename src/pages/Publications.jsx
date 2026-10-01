@@ -4,10 +4,14 @@ import { publications, publicationPath } from '../data/publications'
 
 export default function Publications() {
   return <section className="publications-page">
-    <div className="container">
+    <header className="publications-page__heading">
+      <div className="container">
       <p className="section-label">Carolina Álvarez / Análisis jurídico</p>
       <h1>Publicaciones<span>.</span></h1>
       <p className="publications-page__intro">{publications.length ? 'Artículos, análisis y publicaciones jurídicas.' : 'Este espacio estará dedicado a artículos, análisis y publicaciones jurídicas.'}</p>
+      </div>
+    </header>
+    <div className="container publications-page__content">
       {publications.length ? <ul className="publications-list">{publications.map((article) => <li key={article.slug}>
         <article>
           {article.datePublished && <time className="publication-date" dateTime={article.datePublished}>{new Date(`${article.datePublished}T12:00:00Z`).toLocaleDateString('es-EC', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })}</time>}
