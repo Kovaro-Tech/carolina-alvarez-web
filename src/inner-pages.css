@@ -43,7 +43,14 @@
 }
 .publication-heading .publication-author, .publication-heading .publication-date { color: #e0e8ef; }
 .publication-detail .publication-summary { color: #e0e8ef; margin: 24px 0 0; }
-.publication-detail .publication-body { margin-top: 40px; margin-bottom: 16px; }
+.publication-detail .publication-body {
+  max-width: 800px;
+  /* site.css sets horizontal margins to zero; restore the shared container's
+     centering now that the reading column sits inside a full-width article. */
+  margin-inline: auto;
+  margin-top: 40px;
+  margin-bottom: 16px;
+}
 .publication-body p { color: #52677b; }
 .publication-body h2 {
   font: 29px/1.25 var(--serif); letter-spacing: -.5px; margin: 38px 0 16px;
