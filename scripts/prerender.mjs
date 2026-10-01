@@ -5,6 +5,7 @@ import { createServer } from 'vite'
 import { publicPaths, getPageMeta, renderHead, structuredData } from '../src/data/seo.js'
 import { publications } from '../src/data/publications.js'
 import { SITE_URL, siteConfig } from '../src/data/siteConfig.js'
+import { renderHomeHeroPreload } from '../src/data/homeHero.js'
 
 // Render at build time, with no browser and no production server process.
 const output = resolve('dist')
@@ -31,7 +32,9 @@ try {
     assert.equal((head.match(/<title>/g) || []).length, 1)
     const data = structuredData(path)
     if (data) JSON.parse(head.match(/<script[^>]*>(.*?)<\/script>/s)[1])
-    const html = template.replace('<!--page-head-->', () => head).replace('<div id="root"></div>', () => `<div id="root">${body}</div>`)
+    const html = template.replace('<!--page-head-->', () => head)
+      .replace('<!--page-resources-->', () => renderHomeHeroPreload(path))
+      .replace('<div id="root"></div>', () => `<div id="root">${body}</div>`)
     // Cloudflare Static Assets serves /sobre-mi.html at /sobre-mi with HTTP 200.
     const file = resolve(output, path === '/' ? 'index.html' : `${path.slice(1)}.html`)
     await mkdir(dirname(file), { recursive: true })
