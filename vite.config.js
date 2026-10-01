@@ -1,7 +1,7 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { renderHead } from './src/data/seo.js'
-import { renderHomeHeroPreload } from './src/data/homeHero.js'
+import { renderPageResources } from './src/data/pageResources.js'
 
 // https://vite.dev/config/
 export default defineConfig(({ command }) => ({
@@ -9,7 +9,7 @@ export default defineConfig(({ command }) => ({
     name: 'development-page-head',
     transformIndexHtml(html) {
       return command === 'serve' ? html.replace('<!--page-head-->', renderHead('/'))
-        .replace('<!--page-resources-->', renderHomeHeroPreload('/')) : html
+        .replace('<!--page-resources-->', renderPageResources('/')) : html
     },
   }],
 }))
