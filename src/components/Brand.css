@@ -14,6 +14,10 @@
   height: 64px;
 }
 
+/* <picture> only selects the format; each image stays the only grid item. */
+.logo-artwork picture { display: contents; }
+.logo-artwork source { display: none; }
+
 .logo-image {
   display: block;
   grid-area: 1 / 1;

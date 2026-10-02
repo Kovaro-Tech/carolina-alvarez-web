@@ -35,10 +35,13 @@ for (const icon of Object.values(siteConfig.icons).filter(Boolean)) await access
 
 const vite = await createServer({ server: { middlewareMode: true, hmr: false }, appType: 'custom', logLevel: 'error' })
 try {
-  const { render } = await vite.ssrLoadModule('/src/entry-server.jsx')
+  const { render, preloadAllRoutes } = await vite.ssrLoadModule('/src/entry-server.jsx')
+  // Lazy route modules must be resolved, or renderToString would emit fallbacks.
+  await preloadAllRoutes()
   for (const path of [...publicPaths(), '/404']) {
     const head = renderHead(path)
     const body = render(path)
+    assert(!body.includes('<!--$?-->') && !body.includes('<!--$!-->'), `Suspended route content: ${path}`)
     assert.equal((body.match(/<h1(?:\s|>)/g) || []).length, 1, `Expected one H1: ${path}`)
     assert.equal((head.match(/<title>/g) || []).length, 1)
     const data = structuredData(path)

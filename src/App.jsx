@@ -1,23 +1,22 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import NavigationShell from './navigation/NavigationShell'
 import Footer from './components/Footer'
 import Home from './pages/Home'
-import About from './pages/About'
-import Services from './pages/Services'
-import Contact from './pages/Contact'
-import Publications from './pages/Publications'
-import Privacy from './pages/Privacy'
-import Cookies from './pages/Cookies'
 import NotFound from './pages/NotFound'
-import Publication from './pages/Publication'
 import PageMeta from './components/PageMeta'
 import { whatsappUrl } from './data/siteConfig'
-import './App.css'
-import './site.css'
-import './photo-layout.css'
-import './navigation/navigation.css'
-import './production.css'
-import './inner-pages.css'
-function Layout() { const { key } = useLocation(); return <NavigationShell><a className="skip-link" href="#main-content" data-native-navigation>Ir al contenido</a><Header /><main id="main-content" className="route-transition" key={key} tabIndex={-1}><Routes><Route path="/" element={<Home />} /><Route path="/sobre-mi" element={<About />} /><Route path="/servicios" element={<Services />} /><Route path="/contacto" element={<Contact />} /><Route path="/publicaciones" element={<Publications />} /><Route path="/publicaciones/:slug" element={<Publication />} /><Route path="/politica-de-privacidad" element={<Privacy />} /><Route path="/politica-de-cookies" element={<Cookies />} /><Route path="*" element={<NotFound />} /></Routes></main><Footer /><nav aria-label="Contacto r?pido"><a className="floating-whatsapp" href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11 19.9L3.5 29l6.3-1.5A13 13 0 1 0 16 3Zm0 23.7a10.7 10.7 0 0 1-5.4-1.5l-.4-.2-3.7.9.9-3.6-.2-.4a10.7 10.7 0 1 1 8.8 4.8Zm5.9-8c-.3-.2-2-1-2.3-1.1s-.5-.2-.7.2-.8 1.1-1 1.3-.4.3-.8.1a8.7 8.7 0 0 1-2.6-1.6 9.8 9.8 0 0 1-1.8-2.3c-.2-.4 0-.6.1-.8l.5-.6c.2-.2.2-.4.3-.6s0-.4 0-.6l-1.1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.3 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.3 3.6a12.4 12.4 0 0 0 4.8 4.2c.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 2-.8 2.2-1.6.3-.8.3-1.5.2-1.6s-.3-.2-.6-.4Z" /></svg></a></nav></NavigationShell> }
+import { loadRoute, loadedRoute, routeNames, routePath } from './routes'
+
+// Render an already loaded chunk directly, so preloaded routes never suspend.
+// A failed late chunk (for example after a deploy) reloads the current URL.
+function routePage(name) {
+  const Lazy = lazy(() => loadRoute(name).catch(() => { window.location.reload(); return new Promise(() => {}) }))
+  return function RoutePage() { const Page = loadedRoute(name); return Page ? <Page /> : <Lazy /> }
+}
+const routeElements = routeNames.map((name) => { const Page = routePage(name); return <Route key={name} path={routePath(name)} element={<Page />} /> })
+// Outside the keyed <main>: an existing boundary lets transitions keep the current page.
+const pendingMain = <main id="main-content" className="route-transition" tabIndex={-1} />
+function Layout() { const { key } = useLocation(); return <NavigationShell><a className="skip-link" href="#main-content" data-native-navigation>Ir al contenido</a><Header /><Suspense fallback={pendingMain}><main id="main-content" className="route-transition" key={key} tabIndex={-1}><Routes><Route path="/" element={<Home />} />{routeElements}<Route path="*" element={<NotFound />} /></Routes></main></Suspense><Footer /><nav aria-label="Contacto r?pido"><a className="floating-whatsapp" href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3a13 13 0 0 0-11 19.9L3.5 29l6.3-1.5A13 13 0 1 0 16 3Zm0 23.7a10.7 10.7 0 0 1-5.4-1.5l-.4-.2-3.7.9.9-3.6-.2-.4a10.7 10.7 0 1 1 8.8 4.8Zm5.9-8c-.3-.2-2-1-2.3-1.1s-.5-.2-.7.2-.8 1.1-1 1.3-.4.3-.8.1a8.7 8.7 0 0 1-2.6-1.6 9.8 9.8 0 0 1-1.8-2.3c-.2-.4 0-.6.1-.8l.5-.6c.2-.2.2-.4.3-.6s0-.4 0-.6l-1.1-2.5c-.3-.7-.6-.6-.8-.6h-.7c-.3 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.3 3.6a12.4 12.4 0 0 0 4.8 4.2c.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 2-.8 2.2-1.6.3-.8.3-1.5.2-1.6s-.3-.2-.6-.4Z" /></svg></a></nav></NavigationShell> }
 export default function App() { return <><PageMeta /><Layout /></> }

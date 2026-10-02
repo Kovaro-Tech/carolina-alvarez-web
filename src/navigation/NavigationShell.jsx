@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from 'react'
 import { useLocation, useNavigate, useNavigationType } from 'react-router-dom'
 import { persistEntries, readEntry, saveEntry } from './historyState'
+import { preloadRoute } from '../routes'
 
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const jump = (top) => window.scrollTo({ top, left: 0, behavior: 'instant' })
@@ -84,7 +85,10 @@ export default function NavigationShell({ children }) {
     const oldLocation = previous.current
     const newPage = !oldLocation || oldLocation.pathname !== location.pathname
     const saved = readEntry(location.key)
-    const restore = action === 'POP' && Number.isFinite(saved?.y)
+    // Every full page load without history state shares the "default" key.
+    // On first mount, only a reload or back/forward visit restores its position.
+    const revisit = oldLocation || ['reload', 'back_forward'].includes(performance.getEntriesByType('navigation')[0]?.type)
+    const restore = action === 'POP' && revisit && Number.isFinite(saved?.y)
     const controller = new AbortController()
     motion.current?.abort()
     motion.current = controller
@@ -103,8 +107,13 @@ export default function NavigationShell({ children }) {
     const offset = target ? (headerHeight.current ?? Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--navigation-header-height'))) + 24 : 0
     const destination = target ? bounded(target.getBoundingClientRect().top + window.scrollY - offset) : 0
     const animate = !reducedMotion() && action !== 'POP'
+    // React starts after the prerendered page loads. If the visitor has
+    // already scrolled it, keep their position instead of restoring or resetting.
+    const keepInitialScroll = !oldLocation && !target && window.scrollY > 0
 
-    if (restore) {
+    if (keepInitialScroll) {
+      // The browser's current position already belongs to this entry.
+    } else if (restore) {
       jump(saved.y)
     } else if (!animate) {
       jump(destination)
@@ -166,6 +175,8 @@ export default function NavigationShell({ children }) {
     motion.current?.abort()
     exit.current?.cancel()
     const task = ++sequence.current
+    // The destination chunk loads during the exit fade; navigation commits complete content.
+    const ready = preloadRoute(url.pathname).then(() => true, () => false)
     const main = shell.current.querySelector('main')
     if (url.pathname !== location.pathname && !reducedMotion() && main.animate) {
       exit.current = main.animate([
@@ -174,9 +185,20 @@ export default function NavigationShell({ children }) {
       ], { duration: 140, easing: 'ease-out', fill: 'forwards' })
       try { await exit.current.finished } catch { return }
     }
+    const loaded = await ready
     if (task !== sequence.current) return
+    // A chunk that cannot load (offline, replaced deploy) falls back to the prerendered page.
+    if (!loaded) { window.location.assign(url.href); return }
     navigate(`${url.pathname}${url.search}${url.hash}`)
   }
 
-  return <div ref={shell} onClickCapture={followLink} className={`site-shell ${location.pathname === '/' ? 'home-page' : ''} ${location.pathname === '/sobre-mi' ? 'about-page' : ''}`}>{children}</div>
+  // Fetch a page's chunk as soon as a visitor shows intent to open it.
+  const prefetchLink = (event) => {
+    const link = event.target.closest?.('a[href]')
+    if (!link) return
+    const url = new URL(link.href, window.location.href)
+    if (url.origin === window.location.origin) preloadRoute(url.pathname).catch(() => {})
+  }
+
+  return <div ref={shell} onClickCapture={followLink} onPointerOverCapture={prefetchLink} onFocusCapture={prefetchLink} onTouchStartCapture={prefetchLink} className={`site-shell ${location.pathname === '/' ? 'home-page' : ''} ${location.pathname === '/sobre-mi' ? 'about-page' : ''}`}>{children}</div>
 }

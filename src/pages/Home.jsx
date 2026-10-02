@@ -8,7 +8,9 @@ export default function Home() {
   return <>
     <section className="home-hero" aria-labelledby="home-title">
       <picture>
+        <source media="(max-width: 760px)" type="image/avif" srcSet={homeHero.mobileAvifSrcSet} sizes={homeHero.mobileSizes} width="1408" height="1280" />
         <source media="(max-width: 760px)" type="image/webp" srcSet={homeHero.mobileSrcSet} sizes={homeHero.mobileSizes} width="1408" height="1280" />
+        <source type="image/avif" srcSet={homeHero.avifSrcSet} sizes={homeHero.sizes} width="1920" height="1280" />
         <img className="home-hero__architecture" src={homeHero.src} srcSet={homeHero.srcSet} sizes={homeHero.sizes} alt="" width="1920" height="1280" fetchPriority="high" loading="eager" decoding="async" />
       </picture>
       <div className="container home-hero__inner">

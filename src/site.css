@@ -37,7 +37,6 @@
 .service-card--derecho-penal .service-card__shape { color: #7b827e; }
 .service-card--penal-economico { --service-card-paper: #f1f5f8; }
 .service-card--derecho-tributario { --service-card-paper: #fdfdfb; }
-.home-services-preview__link { margin-top: 30px; }
 
 /* Services: a compact index followed by three editorial chapters. */
 .services-hero { padding: 110px 0 0; }
